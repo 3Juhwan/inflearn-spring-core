@@ -3,6 +3,8 @@ package hello.core.member;
 import hello.core.AppConfig;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -11,8 +13,8 @@ public class MemberServiceTest {
 
     @BeforeEach
     void beforeEach() {
-        AppConfig appConfig = new AppConfig();
-        this.memberService = appConfig.memberService();
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
+        memberService = applicationContext.getBean("memberService", MemberService.class);
     }
 
     @Test
